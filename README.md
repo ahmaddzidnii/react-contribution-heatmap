@@ -20,7 +20,7 @@
 <br />
 
 <div align="center">
-  <a href="[https://react-contribution-heatmap.ahmadzidni.com](https://react-contribution-heatmap.ahmadzidni.com)"><strong>Live Demo →</strong></a>
+  <a href="https://react-contribution-heatmap.ahmadzidni.com"><strong>Live Demo →</strong></a>
 </div>
 
 <br />
