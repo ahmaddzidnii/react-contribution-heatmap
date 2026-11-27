@@ -12,7 +12,7 @@ Thank you for considering contributing to `react-contribution-heatmap`!
 1. Fork and clone the repository:
 
    ```bash
-   git clone [https://github.com/ahmaddzidnii/react-contribution-heatmap.git](https://github.com/ahmaddzidnii/react-contribution-heatmap.git)
+   git clone https://github.com/ahmaddzidnii/react-contribution-heatmap.git
    cd react-contribution-heatmap
    ```
 
