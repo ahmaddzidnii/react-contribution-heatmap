@@ -28,9 +28,12 @@ export function ContributionHeatmap({
   startDate,
   endDate,
   colors,
+  thresholds: customThresholds,
   tooltipContent = defaultTooltipContent,
+  onDayClick,
   showLegend = true,
   legendText = "Learn how we count contributions",
+  legendLabels = ["Less", "More"],
   className,
 }: ContributionHeatmapProps) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
@@ -66,6 +69,17 @@ export function ContributionHeatmap({
       }
     }
 
+    if (customThresholds) {
+      return {
+        contributionMap: map,
+        thresholds: {
+          level1: customThresholds[0],
+          level2: customThresholds[1],
+          level3: customThresholds[2],
+        },
+      };
+    }
+
     return {
       contributionMap: map,
       thresholds:
@@ -77,7 +91,7 @@ export function ContributionHeatmap({
               level3: Math.ceil(maxContribution * 0.75),
             },
     };
-  }, [data]);
+  }, [data, customThresholds]);
 
   const { grid, months } = useMemo(
     () => buildCalendarTable(resolvedStart, resolvedEnd),
@@ -148,6 +162,11 @@ export function ContributionHeatmap({
                           data-date={dateStr}
                           aria-label={tooltipContent({ date: dateStr, contributions: count })}
                           className="rch__cell"
+                          onClick={
+                            onDayClick
+                              ? () => onDayClick({ date: dateStr, contributions: count })
+                              : undefined
+                          }
                           onMouseEnter={(e) => showCellTooltip(e.currentTarget, dateStr, count)}
                           onMouseLeave={() => setTooltip(null)}
                           onFocus={(e) => showCellTooltip(e.currentTarget, dateStr, count)}
@@ -176,13 +195,13 @@ export function ContributionHeatmap({
           <div className="rch__legend">
             <span className="rch__legend-text">{legendText}</span>
             <div className="rch__legend-scale">
-              <span className="rch__legend-label">Less</span>
+              <span className="rch__legend-label">{legendLabels[0]}</span>
               {LEVELS.map((item) => (
                 <div key={item.level} data-level={item.level} className="rch__legend-box">
                   <span className="rch__sr-only">{item.name}</span>
                 </div>
               ))}
-              <span className="rch__legend-label">More</span>
+              <span className="rch__legend-label">{legendLabels[1]}</span>
             </div>
           </div>
         )}
