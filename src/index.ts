@@ -1,5 +1,3 @@
-import { type Data, ReactGithubHeatmapProps } from "./components/ReactGithubHeatmap/types";
-
-export { ReactGithubHeatmap } from "./components/ReactGithubHeatmap";
-
-export type { Data, ReactGithubHeatmapProps };
+export { ContributionHeatmap } from "./components/contribution-heatmap";
+export type { ContributionHeatmapProps, ContributionItem } from "./types";
+export { get52WeeksDateRange } from "./utils/date-utils";

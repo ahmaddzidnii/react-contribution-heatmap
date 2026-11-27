@@ -1,16 +1,22 @@
-## React Github Heatmap
-
-<img src="https://github.com/user-attachments/assets/23f9a2d6-cc57-4b3b-8644-5a9629c149fc" alt="img" style="border-radius: 16px;" />
+## React Contribution Heatmap
 
 <div align="center">
-    <img src="https://badgen.net/npm/v/@ahmaddzidnii/react-github-heatmap" alt="NPM Version" />
-  <img src="https://badgen.net/bundlephobia/minzip/@ahmaddzidnii/react-github-heatmap" alt="minzipped size"/>
-    <img src="https://img.shields.io/github/stars/ahmaddzidnii/react-github-heatmap" alt="Star" />
-</a>
+  <img src="https://github.com/user-attachments/assets/23f9a2d6-cc57-4b3b-8644-5a9629c149fc" alt="React Contribution Heatmap Preview" style="border-radius: 16px;" />
 </div>
+
 <br />
-<div align="center"><strong>React Heatmap – Visualize Data with Style.</strong></div>
-<div align="center"> React Heatmap is a lightweight, highly customizable, and beautifully designed heatmap component for React. Whether you're tracking user interactions, visualizing complex datasets, or enhancing dashboards, this package makes it effortless to create stunning heatmaps.</div>
+
+<div align="center">
+  <img src="https://badgen.net/npm/v/react-contribution-heatmap" alt="NPM Version" />
+  <img src="https://badgen.net/bundlephobia/minzip/react-contribution-heatmap" alt="Minzipped Size" />
+  <img src="https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap" alt="GitHub Stars" />
+</div>
+
+<br />
+
+<div align="center"><strong>React Contribution Heatmap – Visualize Data with Style.</strong></div>
+<div align="center">A lightweight, zero-dependency, and accessible GitHub-style contribution heatmap component for React. Whether you're tracking user activity, visualizing streak data, or enhancing dashboards, this package makes it effortless to render clean heatmaps.</div>
+
 <br />
 
 <div align="center">
@@ -31,89 +37,66 @@
 
 ## Features
 
-- ✅ Fully customizable colors
-- ✅ Fast and lightweight for smooth performance
-- ✅ Interactive & responsive for modern UI needs
-- ✅ Easy integration with React projects
+- ✅ **Zero dependencies** — No external tooltip or CSS-in-JS bloat (~14 kB total package size)
+- ✅ **Fully customizable colors** — Override via the `colors` prop or standard CSS variables
+- ✅ **Accessible by default** — Semantic `<table>` layout, screen-reader labels, and keyboard navigation
+- ✅ **Built-in helpers & TypeScript** — Includes `get52WeeksDateRange()` and full `.d.ts` types
 
 ## Installation
+
+#### With npm
+
+```sh
+npm install react-contribution-heatmap
+```
 
 #### With pnpm
 
 ```sh
-pnpm add @ahmaddzidnii/react-github-heatmap
-```
-
-#### With NPM
-
-```sh
-npm install @ahmaddzidnii/react-github-heatmap
+pnpm add react-contribution-heatmap
 ```
 
 #### With Yarn
 
 ```sh
-yarn add @ahmaddzidnii/react-github-heatmap
+yarn add react-contribution-heatmap
 ```
 
 ## Getting Started
 
-First, to perform testing, we create helper functions `generateDataByDateRange()` and `get52WeeksDateRange` to generate the data in `./helpers.ts`.
+Import `ContributionHeatmap` along with its default stylesheet (`react-contribution-heatmap/style.css`). You can also use the built-in `get52WeeksDateRange()` helper to generate a 52-week range aligned to Sunday:
 
-```ts
-export const generateDataByDateRange = (startDate: string, endDate: string) => {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const generatedData = [];
+```tsx
+import {
+  ContributionHeatmap,
+  type ContributionItem,
+  get52WeeksDateRange,
+} from "react-contribution-heatmap";
+import "react-contribution-heatmap/style.css";
+
+function generateDummyData(startDate: string, endDate: string): ContributionItem[] {
+  const start = new Date(`${startDate}T00:00:00`);
+  const end = new Date(`${endDate}T00:00:00`);
+  const data: ContributionItem[] = [];
 
   for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, "0");
     const day = String(d.getDate()).padStart(2, "0");
 
-    generatedData.push({
+    data.push({
       date: `${year}-${month}-${day}`,
-      contributions: Math.floor(Math.random() * 51), // Random number between 0-100
+      contributions: Math.floor(Math.random() * 20),
     });
   }
 
-  return generatedData;
-};
+  return data;
+}
 
-export const get52WeeksDateRange = ({ endDate }: { endDate: Date }) => {
-  // Go back approximately one year (52 weeks)
-  let startDate = new Date(endDate);
-  startDate.setDate(endDate.getDate() - 52 * 7);
+export function App() {
+  const { startDate, endDate } = get52WeeksDateRange();
+  const data = generateDummyData(startDate, endDate);
 
-  // Adjust to the nearest Sunday if not already a Sunday
-  while (startDate.getDay() !== 0) {
-    startDate.setDate(startDate.getDate() - 1);
-  }
-
-  const strStartDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}-${String(startDate.getDate()).padStart(2, "0")}`;
-  const strEndDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}-${String(endDate.getDate()).padStart(2, "0")}`;
-
-  return { startDate: strStartDate, endDate: strEndDate };
-};
-```
-
-Next, create your React component, for example in `App.tsx`
-
-```tsx
-import { ReactGithubHeatmap } from "@ahmaddzidnii/react-github-heatmap";
-import { get52WeeksDateRange, generateDataByDateRange } from "./helpers";
-
-const App = () => {
-  const { endDate, startDate } = get52WeeksDateRange({
-    endDate: new Date(),
-  });
-  const data = generateDataByDateRange(startDate, endDate);
   return (
     <div
       style={{
@@ -123,102 +106,56 @@ const App = () => {
         height: "100vh",
       }}
     >
-      <ReactGithubHeatmap
-        data={data}
-        tooltipContent={(t) => {
-          if (!t.contributions) {
-            return `No contributions on ${t.date}`;
-          }
-
-          return `${t.contributions} contributions on ${t.date}`;
-        }}
-        tooltipOptions={{
-          place: "top",
-        }}
+      <ContributionHeatmap data="{data}" endDate="{endDate}" startDate="{startDate}" tooltipContent="{(item)">
+          item.contributions === 0
+            ? `No contributions on ${item.date}`
+            : `${item.contributions} contributions on ${item.date}`
+        }
       />
     </div>
   );
-};
+}
 ```
 
 ## Customizing Colors
 
-You can customize the colors of the heatmap by adding your own CSS classes. For example, you can define a custom class in your CSS file and apply it to the heatmap.
+You can customize the 5-level color scale either directly through props or via CSS variables (without needing `!important`).
 
-### Example
+### Option 1: Using the `colors` prop
 
-1. Create a CSS file (e.g., `styles.css`) and define your custom styles:
-
-```css
-[data-level="0"] {
-  background-color: #ebedf0 !important;
-}
-
-[data-level="1"] {
-  background-color: #9be9a8 !important;
-}
-
-[data-level="2"] {
-  background-color: #40c463 !important;
-}
-
-[data-level="3"] {
-  background-color: #30a14e !important;
-}
-
-[data-level="4"] {
-  background-color: #216e39 !important;
-}
-```
-
-2. Import the CSS file into your React component:
+Pass a tuple of 5 colors from level `0` (no contributions) to level `4` (highest contributions):
 
 ```tsx
-import "./styles.css";
-import { ReactGithubHeatmap } from "@ahmaddzidnii/react-github-heatmap";
-import { get52WeeksDateRange, generateDataByDateRange } from "./helpers";
-
-const App = () => {
-  const { endDate, startDate } = get52WeeksDateRange({
-    endDate: new Date(),
-  });
-  const data = generateDataByDateRange(startDate, endDate);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <ReactGithubHeatmap
-        data={data}
-        tooltipContent={(t) => {
-          if (!t.contributions) {
-            return `No contributions on ${t.date}`;
-          }
-
-          return `${t.contributions} contributions on ${t.date}`;
-        }}
-        tooltipOptions={{
-          place: "top",
-        }}
-      />
-    </div>
-  );
-};
+<ContributionHeatmap "#196127"]} "#239a3b", "#7bc96f", "#c6e48b", #ebedf0"," colors="{[" data="{data}"/>
 ```
 
-3. Run your application, and the heatmap will now use the custom styles defined in your CSS file.
+### Option 2: Using CSS Variables (Great for Dark Mode)
+
+Override the `.rch` CSS custom properties in your stylesheet:
+
+```css
+.rch {
+  --rch-color-0: #161b22;
+  --rch-color-1: #0e4429;
+  --rch-color-2: #006d32;
+  --rch-color-3: #26a641;
+  --rch-color-4: #39d353;
+}
+```
 
 ## API
 
-| Prop           | Type         | Description                                                                                                                   |
-| -------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| data           | `arrayofobj` | Array of objects containing `date` and `contributions` for the heatmap.                                                       |
-| startDate      | `string`     | The start date for the heatmap data range in `YYYY-MM-DD` format.                                                             |
-| endDate        | `string`     | The end date for the heatmap data range in `YYYY-MM-DD` format.                                                               |
-| tooltipContent | `function`   | Function to customize the content of the tooltip displayed on hover.                                                          |
-| tooltipOptions | `object`     | Object to configure tooltip behavior and appearance. [See React Tooltip Docs](https://react-tooltip.com/docs/getting-started) |
+| Prop             | Type                                                        | Default                              | Description                                                                                   |
+| ---------------- | ----------------------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `data`           | `Array<{ date: string; contributions: number }>`            | `[]`                                 | Array of daily contribution records (`YYYY-MM-DD`). Duplicate dates are summed automatically. |
+| `startDate`      | `string`                                                    | 52 weeks ago (Sunday)                | Start date in `YYYY-MM-DD` format. Must be provided together with `endDate`.                  |
+| `endDate`        | `string`                                                    | Today                                | End date in `YYYY-MM-DD` format. Must be provided together with `startDate`.                  |
+| `colors`         | `[string, string, string, string, string]`                  | GitHub green palette                 | Tuple of 5 color values mapped to levels `0` through `4`.                                     |
+| `tooltipContent` | `(item: { date: string; contributions: number }) => string` | Ordinal date text                    | Function to customize the tooltip text displayed on hover and keyboard focus.                 |
+| `showLegend`     | `boolean`                                                   | `true`                               | Show or hide the bottom legend footer.                                                        |
+| `legendText`     | `string`                                                    | `"Learn how we count contributions"` | Helper text displayed on the left side of the legend.                                         |
+| `className`      | `string`                                                    | `undefined`                          | Optional CSS class name applied to the root container.                                        |
+
+## License
+
+MIT

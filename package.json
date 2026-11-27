@@ -1,64 +1,75 @@
 {
-  "name": "@ahmaddzidnii/react-github-heatmap",
-  "version": "1.2.2",
-  "description": "React-github-heatmap is a React library for displaying contribution-style heatmaps similar to GitHub's profile activity graph. It is designed to be lightweight, customizable, and easy to integrate into any React project. With support for custom data, flexible theming, and responsive design, this library is perfect for visualizing user activity, analytics, and time-based data patterns. 🚀",
+  "name": "react-contribution-heatmap",
+  "version": "2.0.0",
+  "description": "Lightweight, customizable GitHub-style contribution and activity heatmap component for React.",
   "license": "MIT",
   "author": "ahmaddzidnii",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/index.css"
+  },
   "files": [
     "dist"
   ],
-  "type": "module",
-  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
+  "workspaces": [
+    "examples/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "rollup -c --bundleConfigAsCjs"
+    "dev": "npm run dev --workspace=example-basic",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "release:patch": "npm version patch -m \"chore(release): v%s\" && git push origin main --follow-tags",
+    "release:minor": "npm version minor -m \"chore(release): v%s\" && git push origin main --follow-tags",
+    "release:major": "npm version major -m \"chore(release): v%s\" && git push origin main --follow-tags"
   },
   "keywords": [
     "react",
     "heatmap",
-    "calendar-heatmap",
+    "contribution-heatmap",
+    "contribution-graph",
     "github-heatmap",
-    "react-heatmap",
-    "react-github-heatmap",
-    "react-calendar-heatmap",
-    "react-activity-heatmap",
-    "react-activity-graph",
-    "react-activity-calendar"
+    "calendar-heatmap",
+    "activity-heatmap",
+    "activity-calendar",
+    "habit-tracker",
+    "streak"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmaddzidnii/react-github-heatmap.git"
+    "url": "git+https://github.com/ahmaddzidnii/react-contribution-heatmap.git"
   },
-  "homepage": "https://github.com/ahmaddzidnii/react-github-heatmap#readme",
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.3",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.2",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "rollup": "^4.36.0",
-    "rollup-plugin-dts": "^6.1.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
-    "tslib": "^2.8.1",
-    "typescript": "^5.8.2",
-    "vite": "^6.2.0"
-  },
-  "dependencies": {
-    "classnames": "^2.5.1",
-    "react-tooltip": "^5.28.0"
+  "homepage": "https://github.com/ahmaddzidnii/react-contribution-heatmap#readme",
+  "bugs": {
+    "url": "https://github.com/ahmaddzidnii/react-contribution-heatmap/issues"
   },
   "peerDependencies": {
-    "react": ">=18.0.0 <19.0.0",
-    "react-dom": ">=18.0.0 <19.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "@biomejs/biome": "2.6.9",
+    "@testing-library/jest-dom": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "jsdom": "^29.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.2"
   }
 }
