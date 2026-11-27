@@ -4,7 +4,9 @@ import { ContributionHeatmap } from "../src";
 
 describe("ContributionHeatmap", () => {
   it("throws if only one of startDate or endDate is provided", () => {
-    expect(() => render(<ContributionHeatmap startDate="2026-01-01" />)).toThrow("Both startDate and endDate must be provided together.");
+    expect(() => render(<ContributionHeatmap startDate="2026-01-01" />)).toThrow(
+      "Both startDate and endDate must be provided together.",
+    );
   });
 
   it("calculates contribution levels and aggregates duplicate dates", () => {
@@ -21,9 +23,15 @@ describe("ContributionHeatmap", () => {
       />,
     );
 
-    expect(container.querySelector('[data-date="2026-01-01"]')?.getAttribute("data-level")).toBe("0");
-    expect(container.querySelector('[data-date="2026-01-02"]')?.getAttribute("data-level")).toBe("1");
-    expect(container.querySelector('[data-date="2026-01-03"]')?.getAttribute("data-level")).toBe("4");
+    expect(container.querySelector('[data-date="2026-01-01"]')?.getAttribute("data-level")).toBe(
+      "0",
+    );
+    expect(container.querySelector('[data-date="2026-01-02"]')?.getAttribute("data-level")).toBe(
+      "1",
+    );
+    expect(container.querySelector('[data-date="2026-01-03"]')?.getAttribute("data-level")).toBe(
+      "4",
+    );
   });
 
   it("shows and hides tooltip on hover and focus", () => {
@@ -63,11 +71,7 @@ describe("ContributionHeatmap", () => {
     expect(screen.getByText("Custom legend")).toBeTruthy();
 
     rerender(
-      <ContributionHeatmap
-        startDate="2026-01-01"
-        endDate="2026-01-07"
-        showLegend={false}
-      />,
+      <ContributionHeatmap startDate="2026-01-01" endDate="2026-01-07" showLegend={false} />,
     );
     expect(screen.queryByText("Custom legend")).toBeNull();
   });
