@@ -25,15 +25,15 @@
     "examples/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=example-basic",
+    "dev": "npm --workspace=examples/basic run dev",
     "build": "tsup",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "release:patch": "npm version patch -m \"chore(release): v%s\" && git push origin main --follow-tags",
-    "release:minor": "npm version minor -m \"chore(release): v%s\" && git push origin main --follow-tags",
-    "release:major": "npm version major -m \"chore(release): v%s\" && git push origin main --follow-tags"
+    "check": "npx biome check --write . && npm run typecheck && npm test && npm run build",
+    "prepare": "husky",
+    "release:patch": "npm run check && npm version patch -m \"chore(release): v%s\" && git push origin main --follow-tags",
+    "release:minor": "npm run check && npm version minor -m \"chore(release): v%s\" && git push origin main --follow-tags",
+    "release:major": "npm run check && npm version major -m \"chore(release): v%s\" && git push origin main --follow-tags"
   },
   "keywords": [
     "react",
@@ -65,6 +65,7 @@
     "@testing-library/react": "^16.3.3",
     "@types/react": "^19.3.3",
     "@types/react-dom": "^19.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

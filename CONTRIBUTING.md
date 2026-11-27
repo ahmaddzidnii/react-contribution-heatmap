@@ -1,9 +1,45 @@
-## Releasing
+# Contributing to `react-contribution-heatmap`
 
-Ensure the working tree is clean on `main`, then run one of the release scripts:
+Thank you for considering contributing to `react-contribution-heatmap`!
 
-- `npm run release:patch` — Bug fixes (`x.x.+1`)
-- `npm run release:minor` — Backward-compatible features (`x.+1.0`)
-- `npm run release:major` — Breaking changes (`+1.0.0`)
+## Prerequisites
 
-Pushing the version tag automatically triggers GitHub Actions to run checks, publish to npm with provenance, and create a GitHub Release.
+- **Node.js** 20 or 22+
+- **npm** 10+
+
+## Local Development
+
+1. Fork and clone the repository:
+
+   ```bash
+   git clone [https://github.com/ahmaddzidnii/react-contribution-heatmap.git](https://github.com/ahmaddzidnii/react-contribution-heatmap.git)
+   cd react-contribution-heatmap
+   ```
+
+2. Install dependencies (automatically sets up Husky git hooks):
+
+   ```bash
+   npm install
+   ```
+
+3. Start the local playground:
+
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+- `src/` — Library source code, styles, and TypeScript types.
+- `examples/basic/` — Local Vite playground for visual testing.
+- `tests/` — Vitest unit and component interaction tests.
+
+## Pull Request Checklist
+
+A Husky pre-commit hook runs formatting and type checks automatically on commit. Before opening a pull request, ensure the full suite passes locally:
+
+```bash
+npm run check
+```
+
+Please keep commits focused and include tests in `tests/` for any bug fixes or new props.
