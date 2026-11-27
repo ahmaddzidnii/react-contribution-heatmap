@@ -1,14 +1,14 @@
 ## React Contribution Heatmap
 
 <div align="center">
-  <img src="[https://github.com/user-attachments/assets/23f9a2d6-cc57-4b3b-8644-5a9629c149fc](https://github.com/user-attachments/assets/23f9a2d6-cc57-4b3b-8644-5a9629c149fc)" alt="React Contribution Heatmap Preview" style="border-radius: 16px;" />
+  <img src="[https://raw.githubusercontent.com/ahmaddzidnii/react-contribution-heatmap/main/assets/preview.png](https://raw.githubusercontent.com/ahmaddzidnii/react-contribution-heatmap/main/assets/preview.png)" alt="React Contribution Heatmap Preview" />
 </div>
 
 <br />
 
 <div align="center">
-  <img src="[https://badgen.net/npm/v/react-contribution-heatmap](https://badgen.net/npm/v/react-contribution-heatmap)" alt="NPM Version" />
-  <img src="[https://badgen.net/bundlephobia/minzip/react-contribution-heatmap](https://badgen.net/bundlephobia/minzip/react-contribution-heatmap)" alt="Minzipped Size" />
+  <img src="[https://img.shields.io/npm/v/react-contribution-heatmap](https://img.shields.io/npm/v/react-contribution-heatmap)" alt="NPM Version" />
+  <img src="[https://img.shields.io/npm/l/react-contribution-heatmap](https://img.shields.io/npm/l/react-contribution-heatmap)" alt="License" />
   <img src="[https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap](https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap)" alt="GitHub Stars" />
 </div>
 
@@ -44,7 +44,7 @@
 ## Features
 
 - ✅ **Zero dependencies** — No external tooltip or CSS-in-JS bloat (~14 kB total package size)
-- ✅ **Fully customizable colors** — Override via the `colors` prop or standard CSS variables
+- ✅ **Theme & Dark Mode ready** — Inherits text color automatically and adapts to Tailwind CSS / Shadcn UI tokens
 - ✅ **Accessible by default** — Semantic `<table>` layout, screen-reader labels, and keyboard navigation
 - ✅ **Built-in helpers & TypeScript** — Includes `get52WeeksDateRange()` and full `.d.ts` types
 
@@ -148,9 +148,9 @@ const customColors: [string, string, string, string, string] = [
 <ContributionHeatmap data={data} colors={customColors} />;
 ```
 
-### Option 2: Using CSS Variables (Great for Dark Mode)
+### Option 2: Using CSS Variables (Dark Mode & Shadcn UI)
 
-Override the `.rch` CSS custom properties in your stylesheet:
+Labels inherit your page's text color automatically. Override the `.rch` CSS custom properties in your stylesheet to match Dark Mode or Shadcn UI theme tokens:
 
 ```css
 .rch {
@@ -159,6 +159,20 @@ Override the `.rch` CSS custom properties in your stylesheet:
   --rch-color-2: #006d32;
   --rch-color-3: #26a641;
   --rch-color-4: #39d353;
+}
+```
+
+For **Shadcn UI** projects, bind directly to your theme variables so light/dark mode switches automatically:
+
+```css
+.rch {
+  --rch-border-color: var(--border);
+  --rch-muted-color: var(--muted-foreground);
+  --rch-color-0: var(--muted);
+  --rch-color-1: color-mix(in oklab, var(--primary) 25%, var(--muted));
+  --rch-color-2: color-mix(in oklab, var(--primary) 50%, var(--muted));
+  --rch-color-3: color-mix(in oklab, var(--primary) 75%, var(--muted));
+  --rch-color-4: var(--primary);
 }
 ```
 
