@@ -1,15 +1,15 @@
 ## React Contribution Heatmap
 
 <div align="center">
-  <img src="[https://raw.githubusercontent.com/ahmaddzidnii/react-contribution-heatmap/main/assets/preview.png](https://raw.githubusercontent.com/ahmaddzidnii/react-contribution-heatmap/main/assets/preview.png)" alt="React Contribution Heatmap Preview" />
+  <img src="https://raw.githubusercontent.com/ahmaddzidnii/react-contribution-heatmap/main/assets/preview.png" alt="React Contribution Heatmap Preview" />
 </div>
 
 <br />
 
 <div align="center">
-  <img src="[https://img.shields.io/npm/v/react-contribution-heatmap](https://img.shields.io/npm/v/react-contribution-heatmap)" alt="NPM Version" />
-  <img src="[https://img.shields.io/npm/l/react-contribution-heatmap](https://img.shields.io/npm/l/react-contribution-heatmap)" alt="License" />
-  <img src="[https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap](https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap)" alt="GitHub Stars" />
+  <img src="https://img.shields.io/npm/v/react-contribution-heatmap" alt="NPM Version" />
+  <img src="https://img.shields.io/npm/l/react-contribution-heatmap" alt="License" />
+  <img src="https://img.shields.io/github/stars/ahmaddzidnii/react-contribution-heatmap" alt="GitHub Stars" />
 </div>
 
 <br />
