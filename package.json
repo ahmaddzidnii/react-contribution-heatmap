@@ -1,6 +1,6 @@
 {
   "name": "react-contribution-heatmap",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Lightweight, customizable GitHub-style contribution and activity heatmap component for React.",
   "license": "MIT",
   "author": "ahmaddzidnii",
